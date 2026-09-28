@@ -8,9 +8,15 @@
 </head>
 <body>
 
-  <!-- ─── Header ─────────────────────────────────────────────── -->
+  <!-- ─── Header ──────────────────────────────────────── -->
   <header class="site-header">
     <div class="header-inner">
+      <!-- Mobile menu toggle -->
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+        </svg>
+      </button>
       <div class="brand">
         <svg class="brand-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
           <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="2"/>
@@ -27,111 +33,253 @@
     </div>
   </header>
 
-  <!-- ─── Main ──────────────────────────────────────────────── -->
-  <main class="main-container">
+  <!-- ─── App shell ────────────────────────────────────── -->
+  <div class="app-shell">
 
-    <!-- Input card -->
-    <section class="card input-card">
-      <h2 class="section-title">New Claim Triage</h2>
-      <p class="section-desc">Enter or paste a claim summary below. The system will assess priority, detect fraud indicators, and recommend next actions.</p>
+    <!-- ─── Sidebar ──────────────────────────────────── -->
+    <nav class="sidebar" id="sidebar" aria-label="Main navigation">
 
-      <!-- Quick-fill buttons -->
-      <div class="sample-buttons" role="group" aria-label="Load a sample claim">
-        <span class="sample-label">Load sample:</span>
-        <button type="button" class="btn btn-sample" data-sample="routine">Routine Claim</button>
-        <button type="button" class="btn btn-sample" data-sample="urgent">Urgent Claim</button>
-        <button type="button" class="btn btn-sample" data-sample="fraud">Fraud Risk</button>
+      <!-- Nav sections -->
+      <div class="sidebar-body">
+
+        <div class="nav-section">
+          <span class="nav-section-label">Triage</span>
+          <ul class="nav-list">
+            <li>
+              <a href="#" class="nav-item nav-item--active" aria-current="page">
+                <svg class="nav-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M10 3L3 8v9h5v-4h4v4h5V8L10 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+                New Triage
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M7 7h6M7 10h6M7 13h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                Claim Queue
+                <span class="nav-badge">12</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M10 6v4l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                Recent Cases
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <span class="nav-section-label">Investigation</span>
+          <ul class="nav-list">
+            <li>
+              <a href="#" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M8.5 3a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zM17 17l-3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                Fraud Watchlist
+                <span class="nav-badge nav-badge--red">3</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M3 5h14M3 9h14M3 13h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <circle cx="15" cy="13" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M17 15l1.5 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                SIU Referrals
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <span class="nav-section-label">Reports</span>
+          <ul class="nav-list">
+            <li>
+              <a href="#" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4 16V8l6-5 6 5v8" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                  <rect x="7" y="11" width="6" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                Analytics
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M4 14l4-4 3 3 5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                Triage History
+              </a>
+            </li>
+          </ul>
+        </div>
+
       </div>
 
-      <!-- Form -->
-      <form id="triage-form" novalidate>
-        <label for="claim-input" class="sr-only">Claim summary</label>
-        <textarea
-          id="claim-input"
-          name="claim"
-          rows="7"
-          placeholder="Paste or type the claim summary here…"
-          aria-required="true"
-        ></textarea>
-        <p id="validation-msg" class="validation-msg" role="alert" aria-live="polite"></p>
-        <button type="submit" id="submit-btn" class="btn btn-primary">
-          <span class="btn-text">Analyse Claim</span>
-          <span class="btn-spinner" aria-hidden="true"></span>
-        </button>
-      </form>
-    </section>
+      <!-- Sidebar footer -->
+      <div class="sidebar-footer">
+        <div class="nav-section">
+          <ul class="nav-list">
+            <li>
+              <a href="#" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <circle cx="10" cy="7" r="3" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M4 17c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                Account Settings
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-item">
+                <svg class="nav-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M10 7v3.5L12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                Help &amp; Support
+              </a>
+            </li>
+          </ul>
+        </div>
 
-    <!-- Results card (hidden until analysis completes) -->
-    <section id="results-section" class="card results-card" aria-live="polite" aria-atomic="true">
-
-      <!-- Metadata bar -->
-      <div class="results-meta">
-        <span class="meta-item">
-          <strong>Claim ID:</strong>
-          <span id="result-claim-id">—</span>
-        </span>
-        <span class="meta-divider" aria-hidden="true">|</span>
-        <span class="meta-item">
-          <strong>Analysed:</strong>
-          <span id="result-timestamp">—</span>
-        </span>
-        <span class="meta-divider" aria-hidden="true">|</span>
-        <span class="meta-item">
-          <strong>Officer:</strong>
-          <span>Claims Triage System</span>
-        </span>
-      </div>
-
-      <!-- Priority + Confidence -->
-      <div class="priority-row">
-        <div>
-          <p class="result-label">Priority Level</p>
-          <span id="result-priority" class="priority-badge">—</span>
-          <span id="result-confidence" class="confidence-label"></span>
+        <!-- Officer chip -->
+        <div class="sidebar-user">
+          <div class="sidebar-user-avatar" aria-hidden="true">CO</div>
+          <div class="sidebar-user-info">
+            <span class="sidebar-user-name">Claims Officer</span>
+            <span class="sidebar-user-role">claims.officer</span>
+          </div>
         </div>
       </div>
 
-      <!-- Rationale -->
-      <div class="rationale-box">
-        <p class="result-label">Why this priority?</p>
-        <p id="result-rationale" class="rationale-text">—</p>
+    </nav>
+
+    <!-- Overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- ─── Main content ─────────────────────────────── -->
+    <main class="main-content">
+
+      <!-- Page heading -->
+      <div class="page-heading">
+        <h1 class="page-title">New Claim Triage</h1>
+        <p class="page-subtitle">Enter or paste a claim summary. The system will assess priority, detect fraud indicators, and recommend next actions.</p>
       </div>
 
-      <!-- Risk dimensions -->
-      <div class="risk-dimensions">
-        <p class="result-label">Risk Dimensions</p>
-        <div class="bars-grid" id="risk-bars-container">
-          <!-- Bars injected by JS -->
+      <!-- Input card -->
+      <section class="card input-card">
+
+        <!-- Quick-fill buttons -->
+        <div class="sample-buttons" role="group" aria-label="Load a sample claim">
+          <span class="sample-label">Load sample:</span>
+          <button type="button" class="btn-sample" data-sample="routine">Routine Claim</button>
+          <button type="button" class="btn-sample" data-sample="urgent">Urgent Claim</button>
+          <button type="button" class="btn-sample" data-sample="fraud">Fraud Risk</button>
         </div>
-      </div>
 
-      <!-- Fraud indicators -->
-      <div class="result-block" id="fraud-block">
-        <p class="result-label">Fraud Indicators</p>
-        <ul id="result-fraud-list" class="result-list"></ul>
-      </div>
+        <!-- Form -->
+        <form id="triage-form" novalidate>
+          <label for="claim-input" class="sr-only">Claim summary</label>
+          <textarea
+            id="claim-input"
+            name="claim"
+            rows="7"
+            placeholder="Paste or type the claim summary here…"
+            aria-required="true"
+          ></textarea>
+          <p id="validation-msg" class="validation-msg" role="alert" aria-live="polite"></p>
+          <button type="submit" id="submit-btn" class="btn btn-primary">
+            <span class="btn-text">Analyse Claim</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+          </button>
+        </form>
+      </section>
 
-      <!-- Next actions -->
-      <div class="result-block">
-        <p class="result-label">Recommended Next Actions</p>
-        <ol id="result-actions-list" class="result-list result-list--ordered"></ol>
-      </div>
+      <!-- Results card (hidden until analysis completes) -->
+      <section id="results-section" class="card results-card" aria-live="polite" aria-atomic="true">
 
-      <!-- Escalation -->
-      <div id="escalation-block" class="escalation-block">
-        <div class="escalation-header">
-          <p class="result-label">Escalation</p>
-          <span id="escalation-badge" class="escalation-badge">—</span>
+        <!-- Hero: priority + metadata -->
+        <div class="results-hero">
+          <div class="hero-top">
+
+            <!-- Priority badge + confidence -->
+            <div class="priority-display">
+              <span id="result-priority" class="priority-badge">—</span>
+              <span id="result-confidence" class="confidence-label"></span>
+            </div>
+
+            <!-- Claim metadata -->
+            <div class="results-meta">
+              <div class="meta-item">
+                <span class="meta-key">Claim ID</span>
+                <span class="meta-val" id="result-claim-id">—</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-key">Analysed</span>
+                <span class="meta-val" id="result-timestamp">—</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-key">System</span>
+                <span class="meta-val">ClaimSight Triage</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Rationale -->
+          <p id="result-rationale" class="rationale-text">—</p>
         </div>
-        <p id="escalation-reason" class="escalation-reason">—</p>
-      </div>
 
-    </section>
-  </main>
+        <!-- Body: risk + fraud + actions + escalation -->
+        <div class="results-body">
 
-  <footer class="site-footer">
-    <p>ClaimSight &copy; 2024 &mdash; For demonstration purposes only. Not for production use.</p>
-  </footer>
+          <!-- Risk dimensions -->
+          <div class="risk-dimensions">
+            <p class="section-heading">Risk Dimensions</p>
+            <div class="bars-grid" id="risk-bars-container">
+              <!-- Bars injected by JS -->
+            </div>
+          </div>
+
+          <!-- Fraud indicators -->
+          <div class="result-block" id="fraud-block">
+            <p class="section-heading">Fraud Indicators</p>
+            <ul id="result-fraud-list" class="result-list"></ul>
+          </div>
+
+          <!-- Next actions -->
+          <div class="result-block">
+            <p class="section-heading">Recommended Next Actions</p>
+            <ol id="result-actions-list" class="result-list result-list--ordered"></ol>
+          </div>
+
+          <!-- Escalation -->
+          <div id="escalation-block" class="escalation-block">
+            <div class="escalation-header">
+              <p class="section-heading" style="margin-bottom:0">Escalation</p>
+              <span id="escalation-badge" class="escalation-badge">—</span>
+            </div>
+            <p id="escalation-reason" class="escalation-reason">—</p>
+          </div>
+
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <p>ClaimSight &copy; 2024 &mdash; For demonstration purposes only. Not for production use.</p>
+      </footer>
+
+    </main>
+  </div><!-- /.app-shell -->
 
   <script src="app.js"></script>
 </body>

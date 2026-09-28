@@ -3,70 +3,166 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ClaimSight — Login</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>ClaimSight — Sign In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    /* ── Login-specific overrides ─────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:         #0D1B2A;
+      --navy-mid:     #162236;
+      --navy-surface: #1C2E45;
+      --navy-rim:     #263D58;
+      --blue:         #3B82F6;
+      --blue-muted:   rgba(59,130,246,.15);
+      --red:          #DC2626;
+      --border:       #E4E9EF;
+      --bg:           #F4F6F9;
+      --text:         #0D1B2A;
+      --text-mid:     #3D5068;
+      --text-muted:   #6B7E95;
+      --text-faint:   #A0AEBB;
+      --radius:       10px;
+      --radius-pill:  9999px;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Inter', -apple-system, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
     body {
-      justify-content: center;
-      align-items: center;
+      display: flex;
       min-height: 100vh;
-      background: var(--bg);
+      background: var(--navy);
     }
 
-    .login-wrapper {
-      width: 100%;
-      max-width: 420px;
-      padding: 1.25rem;
-    }
-
-    .login-brand {
+    /* ── Left panel (navy brand) ── */
+    .left-panel {
+      flex: 1;
+      background: var(--navy);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: .5rem;
-      margin-bottom: 2rem;
-      text-align: center;
+      justify-content: space-between;
+      padding: 3rem 3.5rem;
+      min-height: 100vh;
     }
 
-    .login-brand-row {
+    .left-brand {
       display: flex;
       align-items: center;
       gap: .6rem;
     }
 
-    .login-brand svg {
-      width: 32px;
-      height: 32px;
+    .left-brand svg {
+      width: 28px;
+      height: 28px;
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+
+    .left-brand-name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -.4px;
+      color: #fff;
+    }
+
+    .left-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 340px;
+    }
+
+    .left-headline {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      letter-spacing: -.5px;
+      margin-bottom: 1rem;
+    }
+
+    .left-headline em {
+      font-style: normal;
       color: var(--blue);
     }
 
-    .login-brand-name {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--navy);
-      letter-spacing: -.4px;
+    .left-desc {
+      font-size: .9rem;
+      font-weight: 400;
+      color: rgba(255,255,255,.5);
+      line-height: 1.65;
+      max-width: 30ch;
     }
 
-    .login-brand-tagline {
+    /* Feature list */
+    .left-features {
+      list-style: none;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: .7rem;
+    }
+
+    .left-features li {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
       font-size: .82rem;
-      color: var(--text-muted);
+      font-weight: 500;
+      color: rgba(255,255,255,.55);
     }
 
-    .login-card {
-      background: var(--surface);
+    .left-features li::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+      flex-shrink: 0;
+    }
+
+    .left-footer {
+      font-size: .72rem;
+      color: rgba(255,255,255,.2);
+    }
+
+    /* ── Right panel (white form) ── */
+    .right-panel {
+      width: 440px;
+      flex-shrink: 0;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2.5rem;
+      min-height: 100vh;
+    }
+
+    .form-card {
+      width: 100%;
+      max-width: 360px;
+      background: #fff;
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-card);
+      border-radius: 14px;
       padding: 2rem 2rem 1.75rem;
+      box-shadow: 0 1px 2px rgba(13,27,42,.04), 0 4px 20px rgba(13,27,42,.08);
     }
 
-    .login-card h2 {
+    .form-card-title {
       font-size: 1rem;
       font-weight: 700;
       color: var(--navy);
       margin-bottom: 1.5rem;
-      text-align: center;
+      letter-spacing: -.2px;
     }
 
     .form-group {
@@ -75,9 +171,9 @@
 
     .form-group label {
       display: block;
-      font-size: .8rem;
+      font-size: .78rem;
       font-weight: 600;
-      color: var(--text);
+      color: var(--text-mid);
       margin-bottom: .35rem;
     }
 
@@ -86,33 +182,48 @@
       padding: .7rem .9rem;
       border: 1.5px solid var(--border);
       border-radius: var(--radius);
-      font-family: inherit;
+      font-family: 'Inter', sans-serif;
       font-size: .9rem;
+      font-weight: 400;
       color: var(--text);
-      background: #fafbfd;
-      transition: border-color .15s, box-shadow .15s;
+      background: var(--bg);
+      transition: border-color .15s, box-shadow .15s, background .15s;
     }
 
     .form-group input:focus {
       outline: none;
       border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+      box-shadow: 0 0 0 3px var(--blue-muted);
       background: #fff;
     }
 
+    .form-group input::placeholder {
+      color: var(--text-faint);
+    }
+
+    /* Login error */
+    .login-error {
+      font-size: .8rem;
+      font-weight: 500;
+      color: var(--red);
+      min-height: 1.1rem;
+      margin: .4rem 0 .6rem;
+    }
+
+    /* Submit button */
     .btn-login {
       width: 100%;
-      padding: .75rem;
-      background: var(--blue);
+      padding: .72rem;
+      background: var(--navy);
       color: #fff;
       border: none;
       border-radius: var(--radius);
-      font-family: inherit;
-      font-size: .95rem;
+      font-family: 'Inter', sans-serif;
+      font-size: .9rem;
       font-weight: 700;
+      letter-spacing: -.1px;
       cursor: pointer;
-      transition: background .15s;
-      margin-top: .5rem;
+      transition: background .15s, transform .1s;
       position: relative;
       min-height: 44px;
       display: flex;
@@ -121,28 +232,31 @@
       gap: .5rem;
     }
 
-    .btn-login:hover:not(:disabled) { background: var(--blue-hover); }
-    .btn-login:disabled { opacity: .65; cursor: not-allowed; }
+    .btn-login:hover:not(:disabled) { background: var(--navy-mid); }
+    .btn-login:active:not(:disabled) { transform: translateY(1px); }
+    .btn-login:disabled { opacity: .5; cursor: not-allowed; }
 
-    .btn-login .btn-spinner {
+    .btn-spinner {
       display: none;
-      width: 16px; height: 16px;
-      border: 2px solid rgba(255,255,255,.35);
+      width: 15px; height: 15px;
+      border: 2px solid rgba(255,255,255,.3);
       border-top-color: #fff;
       border-radius: 50%;
-      animation: spin .65s linear infinite;
+      animation: spin .6s linear infinite;
     }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     .btn-login.loading .btn-text { opacity: 0; }
     .btn-login.loading .btn-spinner { display: inline-block; position: absolute; }
 
-    /* Demo credentials box */
+    /* Demo credentials */
     .demo-creds {
-      margin-top: 1.5rem;
-      background: #f8fafc;
+      margin-top: 1.25rem;
+      background: var(--bg);
       border: 1px dashed var(--border);
       border-radius: var(--radius);
-      padding: .9rem 1rem;
+      padding: .85rem 1rem;
     }
 
     .demo-creds-header {
@@ -153,89 +267,110 @@
     }
 
     .demo-creds-label {
-      font-size: .75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .06em;
+      font-size: .72rem;
+      font-weight: 600;
       color: var(--text-muted);
+      letter-spacing: .01em;
     }
 
     .btn-fill {
-      padding: .25rem .7rem;
-      font-size: .75rem;
+      padding: .22rem .65rem;
+      font-size: .74rem;
       font-weight: 600;
       background: transparent;
-      border: 1.5px solid var(--blue);
-      color: var(--blue);
+      border: 1px solid var(--navy);
+      color: var(--navy);
       border-radius: var(--radius-pill);
       cursor: pointer;
-      font-family: inherit;
-      transition: background .15s;
+      font-family: 'Inter', sans-serif;
+      transition: background .12s, color .12s;
     }
 
-    .btn-fill:hover { background: #eff6ff; }
+    .btn-fill:hover {
+      background: var(--navy);
+      color: #fff;
+    }
 
     .demo-creds-row {
       display: flex;
       align-items: baseline;
       gap: .5rem;
-      font-size: .82rem;
-      margin-bottom: .2rem;
+      font-size: .8rem;
+      margin-bottom: .15rem;
     }
 
     .demo-creds-row span:first-child {
       color: var(--text-muted);
-      width: 68px;
+      font-weight: 500;
+      width: 70px;
       flex-shrink: 0;
     }
 
     .demo-creds-row code {
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-      font-size: .82rem;
+      font-size: .8rem;
       color: var(--navy);
-      background: #e8edf5;
+      background: #E4EBF5;
       padding: .1rem .45rem;
       border-radius: 4px;
+      font-weight: 500;
     }
 
-    /* Error message */
-    .login-error {
-      font-size: .8rem;
-      color: var(--red);
+    .form-footer {
       text-align: center;
-      min-height: 1.2rem;
-      margin: .5rem 0 0;
+      margin-top: 1.25rem;
+      font-size: .72rem;
+      color: var(--text-faint);
     }
 
-    /* Footer */
-    .login-footer {
-      text-align: center;
-      margin-top: 1.5rem;
-      font-size: .75rem;
-      color: var(--text-light);
+    /* Responsive: stack on small screens */
+    @media (max-width: 720px) {
+      body { flex-direction: column; background: var(--bg); }
+      .left-panel {
+        min-height: auto;
+        padding: 2rem 1.5rem 1.5rem;
+      }
+      .left-headline { font-size: 1.4rem; }
+      .left-features { display: none; }
+      .right-panel {
+        width: 100%;
+        min-height: auto;
+        padding: 1.5rem 1.25rem 2.5rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="login-wrapper">
-
-    <!-- Brand -->
-    <div class="login-brand">
-      <div class="login-brand-row">
-        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-          <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="2"/>
-          <path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="16" cy="16" r="2" fill="currentColor"/>
-        </svg>
-        <span class="login-brand-name">ClaimSight</span>
-      </div>
-      <span class="login-brand-tagline">Faster decisions. Consistent assessments.</span>
+  <!-- ── Left panel ─────────────────────────────── -->
+  <div class="left-panel">
+    <div class="left-brand">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="2"/>
+        <path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="16" cy="16" r="2" fill="currentColor"/>
+      </svg>
+      <span class="left-brand-name">ClaimSight</span>
     </div>
 
-    <!-- Login card -->
-    <div class="login-card">
-      <h2>Sign in to your account</h2>
+    <div class="left-body">
+      <h1 class="left-headline">Triage claims<br>in <em>seconds</em>,<br>not hours.</h1>
+      <p class="left-desc">AI-assisted priority assessment for insurance claims officers. Consistent decisions, every time.</p>
+      <ul class="left-features" aria-hidden="true">
+        <li>Priority triage with confidence scoring</li>
+        <li>Fraud indicator detection</li>
+        <li>Animated risk dimension analysis</li>
+        <li>Recommended actions and escalation</li>
+      </ul>
+    </div>
+
+    <p class="left-footer">For demonstration purposes only.</p>
+  </div>
+
+  <!-- ── Right panel ────────────────────────────── -->
+  <div class="right-panel">
+    <div class="form-card">
+      <h2 class="form-card-title">Sign in to ClaimSight</h2>
 
       <form id="login-form" novalidate>
         <div class="form-group">
@@ -270,58 +405,52 @@
       </div>
     </div>
 
-    <p class="login-footer">For demonstration purposes only &mdash; not for production use.</p>
+    <p class="form-footer">ClaimSight &copy; 2024 &mdash; Demonstration only</p>
   </div>
 
   <script>
     const VALID_USERNAME = 'claims.officer';
     const VALID_PASSWORD = 'Triage@2024';
 
-    const form      = document.getElementById('login-form');
-    const usernameEl= document.getElementById('username');
-    const passwordEl= document.getElementById('password');
-    const errorEl   = document.getElementById('login-error');
-    const loginBtn  = document.getElementById('login-btn');
-    const fillBtn   = document.getElementById('fill-btn');
+    const form       = document.getElementById('login-form');
+    const usernameEl = document.getElementById('username');
+    const passwordEl = document.getElementById('password');
+    const errorEl    = document.getElementById('login-error');
+    const loginBtn   = document.getElementById('login-btn');
+    const fillBtn    = document.getElementById('fill-btn');
 
-    /* One-click credential fill */
     fillBtn.addEventListener('click', () => {
       usernameEl.value = VALID_USERNAME;
       passwordEl.value = VALID_PASSWORD;
       errorEl.textContent = '';
-      usernameEl.focus();
+      passwordEl.focus();
     });
 
-    /* Clear error on input */
     [usernameEl, passwordEl].forEach(el => {
       el.addEventListener('input', () => { errorEl.textContent = ''; });
     });
 
-    /* Login submit */
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-
       const user = usernameEl.value.trim();
       const pass = passwordEl.value;
 
       if (!user || !pass) {
-        errorEl.textContent = 'Please enter both username and password.';
+        errorEl.textContent = 'Enter both username and password to continue.';
         return;
       }
 
-      /* Loading state */
       loginBtn.disabled = true;
       loginBtn.classList.add('loading');
       errorEl.textContent = '';
 
-      /* Simulate auth delay */
       setTimeout(() => {
         if (user === VALID_USERNAME && pass === VALID_PASSWORD) {
           window.location.href = 'index.html';
         } else {
           loginBtn.disabled = false;
           loginBtn.classList.remove('loading');
-          errorEl.textContent = 'Incorrect username or password. Please try again.';
+          errorEl.textContent = 'Incorrect username or password.';
           passwordEl.value = '';
           passwordEl.focus();
         }

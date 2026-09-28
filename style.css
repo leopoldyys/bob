@@ -1,273 +1,331 @@
-/* ══════════════════════════════════════════════
+/* ══════════════════════════════════════════════════════
    ClaimSight — style.css
-   ══════════════════════════════════════════════ */
+   Inter font. Navy blue identity. One typeface, two weights.
+   ══════════════════════════════════════════════════════ */
 
-/* ── 1. Design tokens ──────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ── 1. Design tokens ─────────────────────────────────── */
 :root {
-  /* Brand */
-  --navy:          #0f1f3d;
-  --navy-light:    #1a3260;
-  --blue:          #2563eb;
-  --blue-hover:    #1d4ed8;
+  /* Brand navy */
+  --navy:          #0D1B2A;
+  --navy-mid:      #162236;
+  --navy-surface:  #1C2E45;
+  --navy-rim:      #263D58;
 
-  /* Priority colours */
-  --green:         #16a34a;
-  --green-bg:      #dcfce7;
-  --green-border:  #86efac;
-  --amber:         #d97706;
-  --amber-bg:      #fef3c7;
-  --amber-border:  #fcd34d;
-  --red:           #dc2626;
-  --red-bg:        #fee2e2;
-  --red-border:    #fca5a5;
+  /* Electric blue — interactive only */
+  --blue:          #3B82F6;
+  --blue-hover:    #2563EB;
+  --blue-muted:    rgba(59,130,246,.12);
 
-  /* Neutrals */
-  --bg:            #f1f5f9;
-  --surface:       #ffffff;
-  --border:        #e2e8f0;
-  --text:          #0f172a;
-  --text-muted:    #64748b;
-  --text-light:    #94a3b8;
+  /* Priority — functional, not decorative */
+  --green:         #16A34A;
+  --green-bg:      #F0FDF4;
+  --green-border:  #BBF7D0;
+  --amber:         #D97706;
+  --amber-bg:      #FFFBEB;
+  --amber-border:  #FDE68A;
+  --red:           #DC2626;
+  --red-bg:        #FFF1F1;
+  --red-border:    #FECACA;
 
-  /* Spacing */
+  /* Page surface */
+  --bg:            #F4F6F9;
+  --surface:       #FFFFFF;
+  --border:        #E4E9EF;
+  --border-strong: #C9D3DD;
+
+  /* Typography */
+  --text:          #0D1B2A;
+  --text-mid:      #3D5068;
+  --text-muted:    #6B7E95;
+  --text-faint:    #A0AEBB;
+
+  /* Geometry */
+  --radius-sm:     6px;
   --radius:        10px;
+  --radius-lg:     14px;
   --radius-pill:   9999px;
-  --shadow:        0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.06);
-  --shadow-card:   0 2px 8px rgba(0,0,0,.07), 0 8px 32px rgba(0,0,0,.06);
+
+  /* Shadows */
+  --shadow-card:   0 1px 2px rgba(13,27,42,.04), 0 4px 20px rgba(13,27,42,.08);
+  --shadow-lift:   0 2px 8px rgba(13,27,42,.06), 0 12px 40px rgba(13,27,42,.10);
 }
 
-/* ── 2. Reset & base ───────────────────────────── */
+/* ── 2. Reset & base ──────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { font-size: 15px; }
 
 body {
-  font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+  font-family: 'Inter', -apple-system, "Segoe UI", sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Screen-reader only utility */
 .sr-only {
-  position: absolute;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden; clip: rect(0,0,0,0);
-  white-space: nowrap; border: 0;
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
 }
 
-/* ── 3. Header ─────────────────────────────────── */
+/* ── 3. Header ────────────────────────────────────────── */
 .site-header {
   background: var(--navy);
-  color: #fff;
+  border-bottom: 1px solid var(--navy-rim);
   padding: 0 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .header-inner {
-  max-width: 780px;
+  max-width: 860px;
   margin: 0 auto;
-  padding: 1.25rem 0;
+  padding: .9rem 0;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
+  gap: 1.25rem;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: .6rem;
+  gap: .55rem;
+  flex-shrink: 0;
 }
 
 .brand-icon {
-  width: 28px;
-  height: 28px;
-  color: #60a5fa;
+  width: 26px;
+  height: 26px;
+  color: var(--blue);
   flex-shrink: 0;
 }
 
 .brand-name {
-  font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: -.3px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -.4px;
   color: #fff;
 }
 
+/* Thin vertical rule between brand and tagline */
 .brand-tagline {
-  font-size: .8rem;
-  color: #94a3b8;
-  border-left: 1px solid #334155;
-  padding-left: 1.5rem;
+  font-size: .78rem;
+  font-weight: 400;
+  color: rgba(255,255,255,.4);
+  padding-left: 1.1rem;
+  border-left: 1px solid var(--navy-rim);
   line-height: 1.3;
+  flex: 1;
 }
 
 .header-user {
-  margin-left: auto;
   display: flex;
   align-items: center;
-  gap: .75rem;
+  gap: .65rem;
+  flex-shrink: 0;
 }
 
 .header-username {
-  font-size: .82rem;
-  color: #94a3b8;
+  font-size: .78rem;
+  font-weight: 500;
+  color: rgba(255,255,255,.45);
 }
 
 .btn-signout {
-  font-size: .78rem;
+  font-size: .75rem;
   font-weight: 600;
-  color: #cbd5e1;
+  color: rgba(255,255,255,.55);
   text-decoration: none;
-  border: 1px solid #334155;
+  border: 1px solid var(--navy-rim);
   border-radius: var(--radius-pill);
-  padding: .25rem .75rem;
-  transition: background .15s, color .15s;
+  padding: .22rem .7rem;
+  transition: background .15s, color .15s, border-color .15s;
 }
 
 .btn-signout:hover {
-  background: #1e3a5f;
+  background: var(--navy-surface);
   color: #fff;
+  border-color: rgba(255,255,255,.2);
 }
 
-/* ── 4. Layout ─────────────────────────────────── */
+/* ── 4. Page layout ───────────────────────────────────── */
 .main-container {
   flex: 1;
-  max-width: 780px;
+  max-width: 860px;
   width: 100%;
-  margin: 2rem auto 3rem;
-  padding: 0 1.25rem;
+  margin: 2.25rem auto 3.5rem;
+  padding: 0 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
-/* ── 5. Cards ──────────────────────────────────── */
+/* Page heading area */
+.page-heading {
+  margin-bottom: .25rem;
+}
+
+.page-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -.3px;
+  line-height: 1.3;
+}
+
+.page-subtitle {
+  margin-top: .3rem;
+  font-size: .875rem;
+  color: var(--text-muted);
+  max-width: 56ch;
+  line-height: 1.55;
+}
+
+/* ── 5. Cards ─────────────────────────────────────────── */
 .card {
   background: var(--surface);
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   border: 1px solid var(--border);
   padding: 1.75rem 2rem;
 }
 
-.section-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--navy);
-  margin-bottom: .4rem;
+/* Section labels — left-border treatment, not tracked caps */
+.section-heading {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text-mid);
+  padding-left: .7rem;
+  border-left: 2px solid var(--navy);
+  margin-bottom: 1rem;
+  line-height: 1.3;
 }
 
-.section-desc {
-  color: var(--text-muted);
-  font-size: .875rem;
-  margin-bottom: 1.25rem;
-  line-height: 1.5;
-}
-
-/* ── 6. Sample buttons ─────────────────────────── */
+/* ── 6. Sample buttons ────────────────────────────────── */
 .sample-buttons {
   display: flex;
   align-items: center;
   gap: .5rem;
   flex-wrap: wrap;
   margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
 }
 
 .sample-label {
-  font-size: .8rem;
-  color: var(--text-muted);
+  font-size: .78rem;
   font-weight: 500;
+  color: var(--text-muted);
   white-space: nowrap;
 }
 
-/* ── 7. Button base ────────────────────────────── */
+.btn-sample {
+  padding: .3rem .85rem;
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--text-mid);
+  border-radius: var(--radius-pill);
+  font-family: 'Inter', sans-serif;
+  font-size: .78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .12s, border-color .12s, color .12s;
+}
+
+.btn-sample:hover {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+
+/* ── 7. Textarea ──────────────────────────────────────── */
+textarea {
+  width: 100%;
+  padding: .9rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-family: 'Inter', sans-serif;
+  font-size: .9rem;
+  font-weight: 400;
+  color: var(--text);
+  background: var(--bg);
+  resize: vertical;
+  transition: border-color .15s, box-shadow .15s, background .15s;
+  line-height: 1.65;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px var(--blue-muted);
+  background: #fff;
+}
+
+textarea::placeholder {
+  color: var(--text-faint);
+  font-weight: 400;
+}
+
+/* ── 8. Validation ────────────────────────────────────── */
+.validation-msg {
+  font-size: .8rem;
+  font-weight: 500;
+  color: var(--red);
+  min-height: 1.2rem;
+  margin: .4rem 0 .75rem;
+}
+
+/* ── 9. Primary button ────────────────────────────────── */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: .5rem;
   border: none;
   border-radius: var(--radius);
-  font-family: inherit;
-  font-size: .875rem;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   cursor: pointer;
-  transition: background .15s, border-color .15s, opacity .15s;
+  transition: background .15s, opacity .15s;
 }
 
-.btn-sample {
-  padding: .35rem .85rem;
-  background: transparent;
-  border: 1.5px solid var(--blue);
-  color: var(--blue);
-  border-radius: var(--radius-pill);
-  font-size: .8rem;
-  font-weight: 500;
-}
-
-.btn-sample:hover {
-  background: #eff6ff;
-}
-
-/* ── 8. Textarea ───────────────────────────────── */
-textarea {
-  width: 100%;
-  padding: .85rem 1rem;
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
-  font-family: inherit;
-  font-size: .9rem;
-  color: var(--text);
-  background: #fafbfd;
-  resize: vertical;
-  transition: border-color .15s, box-shadow .15s;
-  line-height: 1.6;
-}
-
-textarea:focus {
-  outline: none;
-  border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(37,99,235,.12);
-  background: #fff;
-}
-
-textarea::placeholder { color: var(--text-light); }
-
-/* ── 9. Validation message ─────────────────────── */
-.validation-msg {
-  font-size: .8rem;
-  color: var(--red);
-  min-height: 1.2rem;
-  margin: .4rem 0 .75rem;
-}
-
-/* ── 10. Submit button ─────────────────────────── */
 .btn-primary {
-  padding: .7rem 1.75rem;
-  background: var(--blue);
+  padding: .72rem 1.75rem;
+  background: var(--navy);
   color: #fff;
   border-radius: var(--radius);
-  font-size: .95rem;
-  box-shadow: 0 1px 3px rgba(37,99,235,.3);
+  font-size: .9rem;
+  font-weight: 700;
   position: relative;
   min-width: 160px;
   justify-content: center;
+  letter-spacing: -.1px;
+  transition: background .15s, transform .1s;
 }
 
-.btn-primary:hover:not(:disabled) { background: var(--blue-hover); }
-.btn-primary:disabled { opacity: .65; cursor: not-allowed; }
+.btn-primary:hover:not(:disabled) {
+  background: var(--navy-mid);
+}
 
-/* Spinner inside button */
+.btn-primary:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+
 .btn-spinner {
   display: none;
-  width: 16px; height: 16px;
-  border: 2px solid rgba(255,255,255,.35);
+  width: 15px; height: 15px;
+  border: 2px solid rgba(255,255,255,.3);
   border-top-color: #fff;
   border-radius: 50%;
-  animation: spin .65s linear infinite;
+  animation: spin .6s linear infinite;
 }
 
 .btn-primary.loading .btn-text { opacity: 0; }
@@ -275,61 +333,54 @@ textarea::placeholder { color: var(--text-light); }
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── 11. Results card (hidden by default) ──────── */
+/* ── 10. Results card ─────────────────────────────────── */
 .results-card {
   display: none;
+  padding: 0;        /* override — inner sections handle own padding */
+  overflow: hidden;
 }
 
 .results-card.visible {
   display: block;
-  animation: fadeSlideIn .3s ease;
 }
 
-@keyframes fadeSlideIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ── 12. Metadata bar ──────────────────────────── */
-.results-meta {
-  display: flex;
-  gap: .75rem;
-  flex-wrap: wrap;
-  align-items: center;
-  padding-bottom: 1rem;
+/* Hero priority band — full-width top section */
+.results-hero {
+  padding: 2rem 2rem 1.5rem;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 1.25rem;
-  font-size: .78rem;
-  color: var(--text-muted);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .35s ease, transform .35s ease;
 }
 
-.meta-item strong { color: var(--text); font-weight: 600; margin-right: .3rem; }
-.meta-divider { color: var(--border); }
+.results-card.visible .results-hero {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-/* ── 13. Priority row ──────────────────────────── */
-.priority-row {
+.hero-top {
   display: flex;
   align-items: flex-start;
+  justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
 }
 
-.result-label {
-  font-size: .72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  color: var(--text-muted);
-  margin-bottom: .4rem;
+.priority-display {
+  display: flex;
+  align-items: baseline;
+  gap: .85rem;
+  flex-wrap: wrap;
 }
 
 .priority-badge {
   display: inline-block;
-  padding: .3rem .9rem;
+  padding: .35rem 1.1rem;
   border-radius: var(--radius-pill);
-  font-size: .85rem;
-  font-weight: 700;
-  letter-spacing: .02em;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -.2px;
   border: 1.5px solid transparent;
 }
 
@@ -338,38 +389,58 @@ textarea::placeholder { color: var(--text-light); }
 .priority-critical { background: var(--red-bg);    color: var(--red);   border-color: var(--red-border); }
 
 .confidence-label {
-  display: inline-block;
-  margin-left: .6rem;
-  font-size: .8rem;
+  font-size: .82rem;
+  font-weight: 500;
   color: var(--text-muted);
-  vertical-align: middle;
 }
 
-/* ── 14. Rationale callout ─────────────────────── */
-.rationale-box {
-  background: #f8fafc;
-  border-left: 3px solid var(--blue);
-  border-radius: 0 var(--radius) var(--radius) 0;
-  padding: .85rem 1.1rem;
-  margin-bottom: 1.25rem;
+/* Metadata row — right side of hero */
+.results-meta {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  align-items: center;
+  font-size: .75rem;
+  color: var(--text-muted);
 }
 
+.meta-item { display: flex; flex-direction: column; gap: .1rem; }
+.meta-key  { font-weight: 600; color: var(--text-mid); font-size: .7rem; }
+.meta-val  { font-weight: 400; color: var(--text-muted); }
+
+/* Rationale */
 .rationale-text {
   font-size: .875rem;
-  color: var(--text);
-  line-height: 1.55;
+  font-weight: 400;
+  color: var(--text-mid);
+  line-height: 1.6;
+  max-width: 72ch;
+  padding-left: .75rem;
+  border-left: 2px solid var(--blue);
 }
 
-/* ── 15. Risk dimension bars ───────────────────── */
-.risk-dimensions {
-  margin-bottom: 1.25rem;
+/* ── 11. Results body sections ────────────────────────── */
+.results-body {
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .35s ease .15s, transform .35s ease .15s;
 }
 
+.results-card.visible .results-body {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Risk bars */
 .bars-grid {
   display: flex;
   flex-direction: column;
-  gap: .65rem;
-  margin-top: .5rem;
+  gap: .7rem;
+  margin-top: .75rem;
 }
 
 .bar-row {
@@ -380,113 +451,106 @@ textarea::placeholder { color: var(--text-light); }
 
 .bar-label {
   font-size: .8rem;
-  color: var(--text);
-  width: 165px;
-  flex-shrink: 0;
   font-weight: 500;
+  color: var(--text-mid);
+  width: 170px;
+  flex-shrink: 0;
 }
 
 .bar-track {
   flex: 1;
-  height: 9px;
-  background: #e2e8f0;
+  height: 7px;
+  background: var(--border);
   border-radius: var(--radius-pill);
   overflow: hidden;
 }
 
 .bar-fill {
   height: 100%;
-  width: 0%;                        /* set by JS */
+  width: 0%;
   border-radius: var(--radius-pill);
-  transition: width .6s cubic-bezier(.4,0,.2,1);
+  transition: width .65s cubic-bezier(.4,0,.2,1);
 }
 
-/* Bar colour classes */
 .bar-fill.bar-low    { background: var(--green); }
 .bar-fill.bar-medium { background: var(--amber); }
 .bar-fill.bar-high   { background: var(--red); }
 
-/* Special: doc quality bar is inverted — high score = good = green */
 .bar-fill.bar-quality-high   { background: var(--green); }
 .bar-fill.bar-quality-medium { background: var(--amber); }
 .bar-fill.bar-quality-low    { background: var(--red); }
 
 .bar-score {
-  font-size: .78rem;
+  font-size: .75rem;
+  font-weight: 600;
   color: var(--text-muted);
-  width: 32px;
+  width: 28px;
   text-align: right;
   flex-shrink: 0;
 }
 
-/* ── 16. Result blocks (fraud / actions) ───────── */
+/* Fraud + actions blocks */
 .result-block {
-  margin-bottom: 1.25rem;
-  padding: .85rem 1rem;
+  padding: 1rem 1.1rem;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: #fafbfd;
+  background: var(--bg);
 }
 
 .result-block.fraud-flagged {
-  background: #fffbeb;
+  background: #FFFDF0;
   border-color: var(--amber-border);
 }
 
 .result-list {
   list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: .45rem;
+  gap: .5rem;
+  margin-top: .65rem;
 }
 
 .result-list li {
   font-size: .875rem;
-  color: var(--text);
-  padding-left: 1.3rem;
+  font-weight: 400;
+  color: var(--text-mid);
+  padding-left: 1.25rem;
   position: relative;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
-/* Bullet for unordered */
 .result-list:not(.result-list--ordered) li::before {
-  content: "•";
+  content: "–";
   position: absolute;
   left: 0;
-  color: var(--text-muted);
-  font-weight: 700;
+  color: var(--text-faint);
+  font-weight: 600;
 }
 
-/* Ordered list counter */
-.result-list--ordered {
-  counter-reset: action-counter;
-}
-.result-list--ordered li {
-  counter-increment: action-counter;
-}
+.result-list--ordered { counter-reset: action-counter; }
+.result-list--ordered li { counter-increment: action-counter; }
 .result-list--ordered li::before {
   content: counter(action-counter) ".";
   position: absolute;
   left: 0;
   color: var(--blue);
   font-weight: 700;
-  font-size: .78rem;
+  font-size: .75rem;
 }
 
 .no-indicators {
   font-size: .875rem;
-  color: var(--text-muted);
+  color: var(--text-faint);
   font-style: italic;
+  margin-top: .65rem;
 }
 
-/* ── 17. Escalation block ──────────────────────── */
+/* Escalation */
 .escalation-block {
   border-radius: var(--radius);
-  padding: .85rem 1rem;
+  padding: 1rem 1.1rem;
   border: 1px solid var(--border);
-  background: #fafbfd;
+  background: var(--bg);
 }
 
 .escalation-block.escalate-yes {
@@ -503,18 +567,16 @@ textarea::placeholder { color: var(--text-light); }
   display: flex;
   align-items: center;
   gap: .75rem;
-  margin-bottom: .35rem;
+  margin-bottom: .4rem;
 }
-
-.escalation-header .result-label { margin-bottom: 0; }
 
 .escalation-badge {
   display: inline-block;
-  padding: .2rem .7rem;
+  padding: .18rem .65rem;
   border-radius: var(--radius-pill);
-  font-size: .78rem;
-  font-weight: 700;
-  letter-spacing: .04em;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .02em;
 }
 
 .escalate-yes .escalation-badge { background: var(--red);   color: #fff; }
@@ -522,27 +584,36 @@ textarea::placeholder { color: var(--text-light); }
 
 .escalation-reason {
   font-size: .875rem;
-  color: var(--text);
-  line-height: 1.5;
+  font-weight: 400;
+  color: var(--text-mid);
+  line-height: 1.55;
 }
 
-/* ── 18. Footer ────────────────────────────────── */
+/* ── 12. Footer ───────────────────────────────────────── */
 .site-footer {
   text-align: center;
   padding: 1.25rem;
-  font-size: .75rem;
-  color: var(--text-light);
+  font-size: .72rem;
+  color: var(--text-faint);
   border-top: 1px solid var(--border);
   background: var(--surface);
 }
 
-/* ── 19. Print styles ──────────────────────────── */
+/* ── 13. Print ────────────────────────────────────────── */
 @media print {
   body { background: #fff; }
-  .site-header { background: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .site-header { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .input-card, .sample-buttons, .site-footer { display: none !important; }
-  .results-card { display: block !important; box-shadow: none; border: 1px solid #ccc; }
+  .results-card { display: block !important; box-shadow: none; }
+  .results-hero, .results-body { opacity: 1 !important; transform: none !important; }
   .main-container { margin: 0; padding: 0; max-width: 100%; }
   .priority-badge, .escalation-badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .bar-fill { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ── 14. Reduced motion ───────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .results-hero, .results-body { transition: none; }
+  .bar-fill { transition: none; }
+  .btn-primary { transition: none; }
 }
