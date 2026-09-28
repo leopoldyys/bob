@@ -1,0 +1,520 @@
+/* ══════════════════════════════════════════════
+   ClaimSight — style.css
+   ══════════════════════════════════════════════ */
+
+/* ── 1. Design tokens ──────────────────────────── */
+:root {
+  /* Brand */
+  --navy:          #0f1f3d;
+  --navy-light:    #1a3260;
+  --blue:          #2563eb;
+  --blue-hover:    #1d4ed8;
+
+  /* Priority colours */
+  --green:         #16a34a;
+  --green-bg:      #dcfce7;
+  --green-border:  #86efac;
+  --amber:         #d97706;
+  --amber-bg:      #fef3c7;
+  --amber-border:  #fcd34d;
+  --red:           #dc2626;
+  --red-bg:        #fee2e2;
+  --red-border:    #fca5a5;
+
+  /* Neutrals */
+  --bg:            #f1f5f9;
+  --surface:       #ffffff;
+  --border:        #e2e8f0;
+  --text:          #0f172a;
+  --text-muted:    #64748b;
+  --text-light:    #94a3b8;
+
+  /* Spacing */
+  --radius:        10px;
+  --radius-pill:   9999px;
+  --shadow:        0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.06);
+  --shadow-card:   0 2px 8px rgba(0,0,0,.07), 0 8px 32px rgba(0,0,0,.06);
+}
+
+/* ── 2. Reset & base ───────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 15px; }
+
+body {
+  font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Screen-reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+/* ── 3. Header ─────────────────────────────────── */
+.site-header {
+  background: var(--navy);
+  color: #fff;
+  padding: 0 1.5rem;
+}
+
+.header-inner {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 1.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+.brand-icon {
+  width: 28px;
+  height: 28px;
+  color: #60a5fa;
+  flex-shrink: 0;
+}
+
+.brand-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -.3px;
+  color: #fff;
+}
+
+.brand-tagline {
+  font-size: .8rem;
+  color: #94a3b8;
+  border-left: 1px solid #334155;
+  padding-left: 1.5rem;
+  line-height: 1.3;
+}
+
+/* ── 4. Layout ─────────────────────────────────── */
+.main-container {
+  flex: 1;
+  max-width: 780px;
+  width: 100%;
+  margin: 2rem auto 3rem;
+  padding: 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ── 5. Cards ──────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+  padding: 1.75rem 2rem;
+}
+
+.section-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: .4rem;
+}
+
+.section-desc {
+  color: var(--text-muted);
+  font-size: .875rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+/* ── 6. Sample buttons ─────────────────────────── */
+.sample-buttons {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.sample-label {
+  font-size: .8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ── 7. Button base ────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  border: none;
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: .875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, opacity .15s;
+}
+
+.btn-sample {
+  padding: .35rem .85rem;
+  background: transparent;
+  border: 1.5px solid var(--blue);
+  color: var(--blue);
+  border-radius: var(--radius-pill);
+  font-size: .8rem;
+  font-weight: 500;
+}
+
+.btn-sample:hover {
+  background: #eff6ff;
+}
+
+/* ── 8. Textarea ───────────────────────────────── */
+textarea {
+  width: 100%;
+  padding: .85rem 1rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: .9rem;
+  color: var(--text);
+  background: #fafbfd;
+  resize: vertical;
+  transition: border-color .15s, box-shadow .15s;
+  line-height: 1.6;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+  background: #fff;
+}
+
+textarea::placeholder { color: var(--text-light); }
+
+/* ── 9. Validation message ─────────────────────── */
+.validation-msg {
+  font-size: .8rem;
+  color: var(--red);
+  min-height: 1.2rem;
+  margin: .4rem 0 .75rem;
+}
+
+/* ── 10. Submit button ─────────────────────────── */
+.btn-primary {
+  padding: .7rem 1.75rem;
+  background: var(--blue);
+  color: #fff;
+  border-radius: var(--radius);
+  font-size: .95rem;
+  box-shadow: 0 1px 3px rgba(37,99,235,.3);
+  position: relative;
+  min-width: 160px;
+  justify-content: center;
+}
+
+.btn-primary:hover:not(:disabled) { background: var(--blue-hover); }
+.btn-primary:disabled { opacity: .65; cursor: not-allowed; }
+
+/* Spinner inside button */
+.btn-spinner {
+  display: none;
+  width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .65s linear infinite;
+}
+
+.btn-primary.loading .btn-text { opacity: 0; }
+.btn-primary.loading .btn-spinner { display: inline-block; position: absolute; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── 11. Results card (hidden by default) ──────── */
+.results-card {
+  display: none;
+}
+
+.results-card.visible {
+  display: block;
+  animation: fadeSlideIn .3s ease;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── 12. Metadata bar ──────────────────────────── */
+.results-meta {
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.25rem;
+  font-size: .78rem;
+  color: var(--text-muted);
+}
+
+.meta-item strong { color: var(--text); font-weight: 600; margin-right: .3rem; }
+.meta-divider { color: var(--border); }
+
+/* ── 13. Priority row ──────────────────────────── */
+.priority-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.result-label {
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-muted);
+  margin-bottom: .4rem;
+}
+
+.priority-badge {
+  display: inline-block;
+  padding: .3rem .9rem;
+  border-radius: var(--radius-pill);
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  border: 1.5px solid transparent;
+}
+
+.priority-low      { background: var(--green-bg);  color: var(--green); border-color: var(--green-border); }
+.priority-high     { background: var(--amber-bg);  color: var(--amber); border-color: var(--amber-border); }
+.priority-critical { background: var(--red-bg);    color: var(--red);   border-color: var(--red-border); }
+
+.confidence-label {
+  display: inline-block;
+  margin-left: .6rem;
+  font-size: .8rem;
+  color: var(--text-muted);
+  vertical-align: middle;
+}
+
+/* ── 14. Rationale callout ─────────────────────── */
+.rationale-box {
+  background: #f8fafc;
+  border-left: 3px solid var(--blue);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: .85rem 1.1rem;
+  margin-bottom: 1.25rem;
+}
+
+.rationale-text {
+  font-size: .875rem;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+/* ── 15. Risk dimension bars ───────────────────── */
+.risk-dimensions {
+  margin-bottom: 1.25rem;
+}
+
+.bars-grid {
+  display: flex;
+  flex-direction: column;
+  gap: .65rem;
+  margin-top: .5rem;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+}
+
+.bar-label {
+  font-size: .8rem;
+  color: var(--text);
+  width: 165px;
+  flex-shrink: 0;
+  font-weight: 500;
+}
+
+.bar-track {
+  flex: 1;
+  height: 9px;
+  background: #e2e8f0;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  width: 0%;                        /* set by JS */
+  border-radius: var(--radius-pill);
+  transition: width .6s cubic-bezier(.4,0,.2,1);
+}
+
+/* Bar colour classes */
+.bar-fill.bar-low    { background: var(--green); }
+.bar-fill.bar-medium { background: var(--amber); }
+.bar-fill.bar-high   { background: var(--red); }
+
+/* Special: doc quality bar is inverted — high score = good = green */
+.bar-fill.bar-quality-high   { background: var(--green); }
+.bar-fill.bar-quality-medium { background: var(--amber); }
+.bar-fill.bar-quality-low    { background: var(--red); }
+
+.bar-score {
+  font-size: .78rem;
+  color: var(--text-muted);
+  width: 32px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ── 16. Result blocks (fraud / actions) ───────── */
+.result-block {
+  margin-bottom: 1.25rem;
+  padding: .85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #fafbfd;
+}
+
+.result-block.fraud-flagged {
+  background: #fffbeb;
+  border-color: var(--amber-border);
+}
+
+.result-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+}
+
+.result-list li {
+  font-size: .875rem;
+  color: var(--text);
+  padding-left: 1.3rem;
+  position: relative;
+  line-height: 1.5;
+}
+
+/* Bullet for unordered */
+.result-list:not(.result-list--ordered) li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+/* Ordered list counter */
+.result-list--ordered {
+  counter-reset: action-counter;
+}
+.result-list--ordered li {
+  counter-increment: action-counter;
+}
+.result-list--ordered li::before {
+  content: counter(action-counter) ".";
+  position: absolute;
+  left: 0;
+  color: var(--blue);
+  font-weight: 700;
+  font-size: .78rem;
+}
+
+.no-indicators {
+  font-size: .875rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ── 17. Escalation block ──────────────────────── */
+.escalation-block {
+  border-radius: var(--radius);
+  padding: .85rem 1rem;
+  border: 1px solid var(--border);
+  background: #fafbfd;
+}
+
+.escalation-block.escalate-yes {
+  background: var(--red-bg);
+  border-color: var(--red-border);
+}
+
+.escalation-block.escalate-no {
+  background: var(--green-bg);
+  border-color: var(--green-border);
+}
+
+.escalation-header {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: .35rem;
+}
+
+.escalation-header .result-label { margin-bottom: 0; }
+
+.escalation-badge {
+  display: inline-block;
+  padding: .2rem .7rem;
+  border-radius: var(--radius-pill);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.escalate-yes .escalation-badge { background: var(--red);   color: #fff; }
+.escalate-no  .escalation-badge { background: var(--green); color: #fff; }
+
+.escalation-reason {
+  font-size: .875rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* ── 18. Footer ────────────────────────────────── */
+.site-footer {
+  text-align: center;
+  padding: 1.25rem;
+  font-size: .75rem;
+  color: var(--text-light);
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+/* ── 19. Print styles ──────────────────────────── */
+@media print {
+  body { background: #fff; }
+  .site-header { background: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .input-card, .sample-buttons, .site-footer { display: none !important; }
+  .results-card { display: block !important; box-shadow: none; border: 1px solid #ccc; }
+  .main-container { margin: 0; padding: 0; max-width: 100%; }
+  .priority-badge, .escalation-badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .bar-fill { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
