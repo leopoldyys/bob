@@ -364,9 +364,49 @@ function handleSubmit(e) {
   setTimeout(analyse, delay);
 }
 
-/* ── 10. Event listeners ──────────────────────────────────── */
+/* ── 10. Tab / page routing ───────────────────────────────── */
+
+/**
+ * Show the panel matching `pageId`, hide all others,
+ * update the active nav item, and close the mobile sidebar.
+ */
+function navigateTo(pageId) {
+  /* Hide all page panels */
+  document.querySelectorAll('.page-panel').forEach(panel => {
+    panel.hidden = true;
+    panel.style.display = 'none';
+  });
+
+  /* Show target panel */
+  const target = document.getElementById('page-' + pageId);
+  if (target) {
+    target.hidden = false;
+    target.style.display = 'flex';
+  }
+
+  /* Update active nav item */
+  document.querySelectorAll('.nav-item').forEach(item => {
+    const isActive = item.dataset.page === pageId;
+    item.classList.toggle('nav-item--active', isActive);
+    if (isActive) {
+      item.setAttribute('aria-current', 'page');
+    } else {
+      item.removeAttribute('aria-current');
+    }
+  });
+
+  /* Scroll main content to top */
+  const mainContent = document.getElementById('main-content');
+  if (mainContent) mainContent.scrollTop = 0;
+  window.scrollTo(0, 0);
+}
+
+/* ── 11. Event listeners ──────────────────────────────────── */
 
 document.addEventListener('DOMContentLoaded', () => {
+
+  /* Initialise — enforce correct panel visibility on load */
+  navigateTo('new-triage');
 
   /* Form submit */
   form.addEventListener('submit', handleSubmit);
@@ -389,6 +429,56 @@ document.addEventListener('DOMContentLoaded', () => {
   textarea.addEventListener('input', () => {
     if (validationMsg.textContent) {
       validationMsg.textContent = '';
+    }
+  });
+
+  /* ── Nav item routing ── */
+  document.querySelectorAll('.nav-item[data-page]').forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const pageId = item.dataset.page;
+      navigateTo(pageId);
+      /* Close sidebar on mobile after navigation */
+      if (window.innerWidth <= 768) {
+        closeSidebar();
+      }
+    });
+  });
+
+  /* ── Mobile sidebar toggle ── */
+  const sidebarToggle  = document.getElementById('sidebar-toggle');
+  const sidebar        = document.getElementById('sidebar');
+  const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    sidebarOverlay.classList.add('open');
+    sidebarToggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    sidebarOverlay.classList.remove('open');
+    sidebarToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  if (sidebarToggle) {
+    sidebarToggle.addEventListener('click', () => {
+      sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+    });
+  }
+
+  if (sidebarOverlay) {
+    sidebarOverlay.addEventListener('click', closeSidebar);
+  }
+
+  /* Close sidebar on Escape */
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sidebar && sidebar.classList.contains('open')) {
+      closeSidebar();
+      sidebarToggle.focus();
     }
   });
 
