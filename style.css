@@ -357,7 +357,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  max-width: 820px;
 }
 
 /* Page heading area */
